@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表白墙1.0</title>
+</head>
+<body>
+    <div class="container">
+        <h1>表白墙</h1>
+        <p>输入后点击提交, 会将信息显示在表格中</p>
+        <div class="row">
+            <span>谁: </span>
+            <input class="edit" type="text">
+        </div>
+        <div class="row">
+            <span>对谁: </span>
+            <input class="edit" type="text">
+        </div>
+        <div class="row">
+            <span>说什么: </span>
+            <input class="edit" type="text">
+        </div>
+        <div class="row">
+            <input type="button" value="提交" class="submit">
+        </div>
+    </div>
+
+    
+    <style>
+        * {
+             margin: 0;
+             padding: 0;
+        }
+         .container {
+             width: 400px;
+             margin: 0 auto;
+        }
+         h1 {
+             text-align: center;
+             padding: 20px 0;
+        }
+         p {
+             color: #666;
+             text-align: center;
+             font-size: 14px;
+             padding: 10px 0;
+        }
+         .row {
+             height: 40px;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+        }
+         span {
+             width: 100px;
+             line-height: 40px;
+        }
+         .edit {
+             width: 200px;
+             height: 30px;
+        }
+         .submit {
+             width: 304px;
+             height: 40px;
+             color: white;
+             background-color: orange;
+             border: none;
+         } 
+    </style>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script>
+        //加入ajax的代码，此处要加入的逻辑有两个部分(ajax在请求开始时响应)
+        //点击按钮提交的时候，ajax要构造发送给服务器
+
+        //页面加载的时候，从服务器获取消息列表，并在页面上直接显示，不用跳转
+        function getMessages(){
+            $.ajax({
+                type:"get",
+                url:"message",
+                success: function(body){
+                    // 当前body已经是一个js对象数组了，ajax会根据响应content type来自动进行解析
+                    //如果服务器返回content-type已经是application/json了，ajax就会把body自动转成js的对象
+                    //如果客户端没有自动转，也可以通过JSON.parse（） 这个函数来手动转换~~
+                    
+                    //依次取出数组的元素
+                    let container=document.querySelector(".container");
+                    for(let message_tmp of body){
+                        let row = document.createElement('div');
+                        row.className = 'row';
+                        row.innerHTML =message_tmp.from + '对' + message_tmp.to + '说: ' +message_tmp.message;
+                          // 把构造好的元素添加进去
+                        container.appendChild(row);
+                    }
+                },
+                
+            });
+        };
+        //加上函数调用
+        getMessages();
+             // 给点击按钮注册点击事件
+        var submit = document.querySelector('.submit');
+        submit.onclick = function () {
+                // 1. 获取到编辑框内容
+                var edits = document.querySelectorAll('.edit');
+                var from = edits[0].value;
+                var to = edits[1].value;
+                var message = edits[2].value;
+                console.log(from + "," + to + "," + message);
+                if (from == '' || to == '' || message == '') {
+                     return;
+                 }
+                // 2. 生成一个新的div，内容就是input里的内容，把这个新的div加到页面中
+                var row = document.createElement('div');
+                row.className = 'row';
+                row.innerHTML = from + '对' + to + '说: ' + message;
+                // 把构造好的元素添加进去
+                var container = document.querySelector('.container');
+                container.appendChild(row);
+                // 3. 同时清理之前输入框的内容 
+                for (var i = 0; i < 3; i++) {
+                    edits[i].value = '';
+                }
+                //4.把当前获取到的输入框的内容，构造成一个HTTP POST请求，通过ajax发给服务器
+                let body1={
+                    from: from,
+                    to: to,
+                    message:message
+                };
+                $.ajax({
+                    type: "post",
+                    url:"message",
+                    contentType: "applicaton/json;charset=utf8",
+                    //对象转换成json字符串
+                    //将body1提交给服务器中
+                    data:JSON.stringify(body1),
+                    success:function(){
+                        alert("消息提交成功！");
+                    },
+                    error: function(){
+                        alert("消息提交失败！");
+                    }
+        })
+    }   
+    </script>
+</body>
+</html>
