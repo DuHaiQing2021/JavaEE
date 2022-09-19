@@ -1,3 +1,5 @@
+package model;
+
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 import javax.sql.DataSource;
@@ -5,7 +7,7 @@ import java.sql.*;
 
 //使用这个类和数据建立连接
 public class DBUtil {
-    private static final String URL="jdbc:mysql://127.0.0.1:3306/BlogSystem?characterEncoding=utf8";
+    private static final String URL="jdbc:mysql://127.0.0.1:3306/BlogSystem?characterEncoding=utf8&&useSSL=false";
     private static final String USERNAME="root";
     private static final String PASSWORD="123456";
 
@@ -27,7 +29,7 @@ public class DBUtil {
     public static Connection getConnection() throws SQLException {
         return getDataSource().getConnection();
     }
-    public void close(Connection connection, PreparedStatement statement, ResultSet resultSet){
+    public static void close(Connection connection, PreparedStatement statement, ResultSet resultSet){
         if (resultSet!=null){
             try {
                 resultSet.close();

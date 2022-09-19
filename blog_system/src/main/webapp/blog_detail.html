@@ -7,6 +7,14 @@
     <title>博客详情页</title>
     <link rel="stylesheet" href="CSS/common.css">
     <link rel="stylesheet" href="CSS/blog_detail.css">
+
+    <!-- 引入editor.md的依赖  需要路径要存在正确-->
+    <link rel="stylesheet" href="editor.md/css/editormd.min.css">
+    <!-- 这个文件需要手动创建 引入程序  -->
+    <script src="js/jquery.min.js"></script>
+    <script src="editor.md/lib/marked.min.js"></script>
+    <script src="editor.md/lib/prettify.min.js"></script>
+    <script src="editor.md/editormd.js"></script>
 </head>
 <body>
     <!--导航栏-->
@@ -16,7 +24,7 @@
         <div class="void"></div>
         <a href="blog_list.html">主页</a>
         <a href="blog_edit.html">写博客</a>
-        <a href="blog_login.html">注销</a>
+        <a href="logout">注销</a>
     </div>
     <!-- 这里的.container作为页面的版心 -->
     <div class="container">
@@ -24,7 +32,7 @@
         <div class="left">
            <div class="card">
             <img src="image/logo.jpg" alt="">
-            <h2>杜海庆</h2>
+            <h2></h2>
             <a href="#">github地址</a>
             <div class="counter">
                 <span>文章</span>
@@ -38,48 +46,71 @@
         </div>
         <div class="right">
             <div class="blog-content">
-                <h3>博客标题</h3>
+                <!-- 存放标题 -->
+                <h3></h3>
+
+                <!-- 存放时间 -->
                 <div class="date">
-                    2022-09-11 11点54分
+                   
+                </div>
+
+                <!-- 存放正文 -->
+                <div id="content" style="opacity: 60%">
+
                 </div>
                 
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum atque veritatis nemo vel eveniet possimus accusantium nulla, sint nobis numquam corporis omnis velit, quia et impedit necessitatibus voluptatibus tempora illum.
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis dolor, placeat rerum magni sapiente dignissimos enim, tenetur inventore corrupti animi consectetur ab sed! Quos expedita dignissimos velit deleniti, minima fuga?
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis assumenda eaque exercitationem minima ipsa ad eligendi perspiciatis reprehenderit molestias doloremque alias cum, recusandae neque aut vero, ipsam cumque. Iusto, nostrum.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat temporibus dicta minima placeat dolores, perspiciatis autem tempora. Beatae necessitatibus aliquid iste molestiae quod culpa eveniet dolores inventore sunt laborum! Error.
-                </p>
-                <p> 
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem temporibus nobis eum dignissimos consequuntur hic cumque consectetur ullam quam voluptatem cupiditate voluptate beatae dolorum voluptates corporis quia, ducimus perspiciatis quae.
-                </p>
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum atque veritatis nemo vel eveniet possimus accusantium nulla, sint nobis numquam corporis omnis velit, quia et impedit necessitatibus voluptatibus tempora illum.
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis dolor, placeat rerum magni sapiente dignissimos enim, tenetur inventore corrupti animi consectetur ab sed! Quos expedita dignissimos velit deleniti, minima fuga?
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis assumenda eaque exercitationem minima ipsa ad eligendi perspiciatis reprehenderit molestias doloremque alias cum, recusandae neque aut vero, ipsam cumque. Iusto, nostrum.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat temporibus dicta minima placeat dolores, perspiciatis autem tempora. Beatae necessitatibus aliquid iste molestiae quod culpa eveniet dolores inventore sunt laborum! Error.
-                </p>
-                <p> 
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem temporibus nobis eum dignissimos consequuntur hic cumque consectetur ullam quam voluptatem cupiditate voluptate beatae dolorum voluptates corporis quia, ducimus perspiciatis quae.
-                </p>
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum atque veritatis nemo vel eveniet possimus accusantium nulla, sint nobis numquam corporis omnis velit, quia et impedit necessitatibus voluptatibus tempora illum.
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis dolor, placeat rerum magni sapiente dignissimos enim, tenetur inventore corrupti animi consectetur ab sed! Quos expedita dignissimos velit deleniti, minima fuga?
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis assumenda eaque exercitationem minima ipsa ad eligendi perspiciatis reprehenderit molestias doloremque alias cum, recusandae neque aut vero, ipsam cumque. Iusto, nostrum.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat temporibus dicta minima placeat dolores, perspiciatis autem tempora. Beatae necessitatibus aliquid iste molestiae quod culpa eveniet dolores inventore sunt laborum! Error.
-                </p>
-                <p> 
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem temporibus nobis eum dignissimos consequuntur hic cumque consectetur ullam quam voluptatem cupiditate voluptate beatae dolorum voluptates corporis quia, ducimus perspiciatis quae.
-                </p>
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum atque veritatis nemo vel eveniet possimus accusantium nulla, sint nobis numquam corporis omnis velit, quia et impedit necessitatibus voluptatibus tempora illum.
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis dolor, placeat rerum magni sapiente dignissimos enim, tenetur inventore corrupti animi consectetur ab sed! Quos expedita dignissimos velit deleniti, minima fuga?
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis assumenda eaque exercitationem minima ipsa ad eligendi perspiciatis reprehenderit molestias doloremque alias cum, recusandae neque aut vero, ipsam cumque. Iusto, nostrum.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat temporibus dicta minima placeat dolores, perspiciatis autem tempora. Beatae necessitatibus aliquid iste molestiae quod culpa eveniet dolores inventore sunt laborum! Error.
-                </p>
-                <p> 
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem temporibus nobis eum dignissimos consequuntur hic cumque consectetur ullam quam voluptatem cupiditate voluptate beatae dolorum voluptates corporis quia, ducimus perspiciatis quae.
-                </p>
-
             </div>
+            <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+            <script src="js/common.js"></script>
+            <script>
+                function getBlogDetail(){
+                    $.ajax({
+                        type:'get',
+                        //location.search 拿到了形如‘？blogId=5’这样的内容，
+                        //这个参数来自于博客列表页的a标签
+                        url:'blog'+location.search,
 
+                        success:function(body){
+                            //根据body中的内容构造页面
+                            //1.构造博客标题
+                            let h3=document.querySelector(".blog-content>h3");
+                            h3.innerHTML=body.title;
+                            //2.构造博客发布时间
+                            let dateDiv=document.querySelector(".date");
+                            dateDiv.innerHTML=body.postTime;
+                            //3.构造博客正文
+                            //如果直接把content设为innerHTML，此时展示在界面的内容就是原始的markdown字符串
+                            //所以咱们需要的是渲染后的，带有格式的效果
+                            // let contentDiv=document.querySelector("#content");
+                            // contentDiv.innerHTML=body.content;
+                            editormd.markdownToHTML('content',{
+                                markdown:body.content,
+                            });
+                        }
+                    });
+                }
+                getBlogDetail();
+                //从服务器获取一下当前博客的作者信息，并显示到界面上
+                function getAuthorInfo(){
+                    $.ajax({
+                        type:'get',
+                        url:'authorInfo'+location.search,
+                        success:function(body){
+                            if(body.username){
+                                //如果响应中的username存在，就把值显示在页面上
+                                setCardName(body.username);
+                            }else{
+                                console.log("获取作者信息失败！"+body.reason);
+                            }
+                        }
+
+                    })
+                }
+
+                //判断用户的登录状态
+                getUserInfo("blog_detail.html");
+                //获取作者信息
+                getAuthorInfo();
+            </script>
+            
         </div>

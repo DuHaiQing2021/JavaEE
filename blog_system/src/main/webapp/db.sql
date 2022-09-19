@@ -12,6 +12,13 @@ create table blog(
     userId int,
     postTime datetime
 );
+--给博客表插入数据方便测试
+insert into blog value(null,"这是第一篇博客","从今天起,开始认真学Java",1,now());
+insert into blog value(null,"这是第二篇博客","从昨天起,开始认真学Java",1,now());
+insert into blog value(null,"这是第三篇博客","从前天起,开始认真学Java",1,now());
+insert into blog value(null,"这是第一篇博客","从今天起,开始认真学Java",4,now());
+insert into blog value(null,'这是第二篇博客','#一级标题\n###三级标题\n>这是引用内容',2,now());
+
 
 --创建一个用户表
 drop table if exists user;
