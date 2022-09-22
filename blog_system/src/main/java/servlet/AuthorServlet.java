@@ -36,6 +36,7 @@ public class AuthorServlet extends HttpServlet {
         //根据blog对象，查询到用户对象
          UserDao userDao=new UserDao();
          User author=userDao.selectById(blog.getUserId());
+         System.out.println();
          if (author == null){
              resp.getWriter().write("{\"ok\":false,\"reason\":\"该博客作者不存在\"}");
              return;

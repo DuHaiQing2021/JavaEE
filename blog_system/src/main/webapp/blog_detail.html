@@ -61,8 +61,12 @@
                 
             </div>
             <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-            <script src="js/common.js"></script>
             <script>
+                 //设置用户信息
+                 function setCardName(username){
+                     let h3=document.querySelector(".card h2");
+                     h3.innerHTML=username;
+                 }
                 function getBlogDetail(){
                     $.ajax({
                         type:'get',
@@ -91,7 +95,7 @@
                 }
                 getBlogDetail();
                 //从服务器获取一下当前博客的作者信息，并显示到界面上
-                function getAuthorInfo(){
+                function getAuthorInfo(user){
                     $.ajax({
                         type:'get',
                         url:'authorInfo'+location.search,
@@ -99,6 +103,15 @@
                             if(body.username){
                                 //如果响应中的username存在，就把值显示在页面上
                                 setCardName(body.username);
+                                if(user.username == body.username){
+                                    //作者和登录的用户是一个人显示删除按钮
+                                    let navDiv=document.querySelector(".nav");
+                                    let a = document.createElement("a");
+                                    a.innerHTML="删除";
+                                    //期望点击删除
+                                    a.href="blogDelete"+location.search;
+                                    navDiv.appendChild(a);
+                                }
                             }else{
                                 console.log("获取作者信息失败！"+body.reason);
                             }
@@ -107,10 +120,34 @@
                     })
                 }
 
+                function getUserInfo(){
+                    $.ajax({
+                        type:'get',
+                        url:'login',
+                        success: function(body){
+                            //判断此处的body是不是一个有效的user对象（userId 是否为0）
+                            if(body.userId && body.userId > 0){
+                                //登录成功！
+                                // console.log("当前用户登录成功！用户名："+body.username);
+                                //获取作者信息
+                                getAuthorInfo(body);
+                            }else{
+                                //登录失败！
+                                //让前端页面，跳转到 login.html
+                                alert("当前您尚未登录！请登录后再访问博客页面！");
+                                location.assign('blog_login.html');
+                            }
+                        },
+                        error: function(){
+                            location.assign('blog_login.html');
+                        }
+
+                    })
+                }
                 //判断用户的登录状态
-                getUserInfo("blog_detail.html");
-                //获取作者信息
-                getAuthorInfo();
+                getUserInfo();
+               
+
             </script>
             
         </div>

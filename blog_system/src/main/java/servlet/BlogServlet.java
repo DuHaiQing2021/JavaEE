@@ -62,8 +62,7 @@ public class BlogServlet extends HelloServlet {
         String title=req.getParameter("title");
         String content=req.getParameter("content");
 
-        System.out.println(title);
-        System.out.println(content);
+
         if (title == null||"".equals(title)||content==null||"".equals(content)){
             //直接告诉客户端，请求参数不对
             resp.setContentType("text/html;charset=utf8");
@@ -76,7 +75,9 @@ public class BlogServlet extends HelloServlet {
         blog.setTitle(title);
         blog.setContent(content);
         //作者id就是当前提交这个博客的用户的身份信息！
-        blog.setBlogId(user.getUserId());
+//        blog.setBlogId(user.getUserId());
+        blog.setUserId(user.getUserId());
+
         BlogDao blogDao=new BlogDao();
         blogDao.insert(blog);
 
