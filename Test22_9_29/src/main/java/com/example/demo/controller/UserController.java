@@ -10,8 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.UUID;
 
 @Controller
@@ -101,10 +103,38 @@ public class UserController {
     @RequestMapping("/cookie")
     public void getCookie(HttpServletRequest request){
         Cookie[] cookies=request.getCookies();
-        for (Cookie item:cookies){
-            log.info("Cookie Name: "+item.getName());
+        for (Cookie item : cookies){
+            log.info("Cookie Name: "+item.getName()+
+                    "| Cookie Value"+item.getValue());
         }
 
     }
+
+    @RequestMapping("/cookie2")
+    public String getCookie2(@CookieValue("bite")String bit,
+                             @CookieValue("student")String stu){
+        return "Cookie Value:"+bit+"<br>+Cookie Value:"+stu;
+    }
+
+    @RequestMapping("/getheader")
+    public String getHead(HttpServletRequest request) {
+        return "header:"+request.getHeader("User-Agent");
+    }
+
+    @RequestMapping("/getheader2")
+    public String getHead2(@RequestHeader("User-Agent")String userAgent){
+        return "header:"+userAgent;
+    }
+
+    @RequestMapping("/setsession")
+    public  boolean setSession(HttpServletRequest request) {
+        boolean result=false;
+        //1.得到HttpSession
+        HttpSession session=request.getSession(true);
+        session.setAttribute("userinfo","userinfo");
+        result=true;
+        return result;
+    }
+
 
 }
