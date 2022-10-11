@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.model.UserInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,9 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Slf4j
 class UserMapperTest {
 
     @Resource
@@ -19,6 +23,7 @@ class UserMapperTest {
     @Test
     void getUserById() {
         UserInfo userInfo =userMapper.getUserById(1);
+        System.out.println(userInfo);
         Assertions.assertNotNull(userInfo);
     }
 
@@ -41,7 +46,7 @@ class UserMapperTest {
     @Test
     void add() {
         UserInfo userInfo=new UserInfo();
-        userInfo.setUsername("王五");
+        userInfo.setName("士大夫");
         userInfo.setPassword("123456");
         userInfo.setPhoto("");
         int result=userMapper.add(userInfo);
@@ -52,7 +57,7 @@ class UserMapperTest {
     @Test
     void add2() {
         UserInfo userInfo=new UserInfo();
-        userInfo.setUsername("老六");
+        userInfo.setName("ffsdf");
         userInfo.setPassword("123456");
         userInfo.setPhoto("");
         System.out.println("添加之前 id："+userInfo.getId());
@@ -62,4 +67,33 @@ class UserMapperTest {
         Assertions.assertEquals(1,result);
 
     }
+
+    @Test
+    void getUserByName() {
+        List<UserInfo> userInfoList =userMapper.getUserByName("李四");
+        Assertions.assertNotNull(userInfoList);
+//        System.out.println(userInfo);
+    }
+
+    @Test
+    void getOrderList() {
+        List<UserInfo> list=userMapper.getOrderList("desc");
+        log.info(list.toString());
+    }
+
+    @Test
+    void login() {
+        String username="李四";
+        String password="''or 1='1'";
+        UserInfo userInfo=userMapper.login(username,password);
+        log.info("用户信息："+userInfo);
+    }
+
+    @Test
+    void getUserAndArticleByUid() {
+        UserInfo userInfo=userMapper.getUserAndArticleByUid(2);
+        log.info(userInfo.toString());
+
+    }
+
 }

@@ -39,7 +39,7 @@
         <!-- 右侧内容详情 -->
         <div class="right">
               <!-- 一个blog对应一个博客 -->
-              <div class="blog">
+              <div class="note">
                 <div class="title">
                     <!-- 博客题目 -->
                 </div>
@@ -56,26 +56,6 @@
                 </div>
                 <div>
                     <a href="blog_detail.html">查看全文 &gt; &gt;</a>
-                </div>
-              </div>
-               <!-- 一个blog对应一个博客 -->
-               <div class="blog">
-                <div class="title">
-                    <!-- 博客题目 -->
-                </div>
-                <div class="time">
-                    <!-- 2022-09-10 22点19分 -->
-                </div>
-                <!-- 博客内容 -->
-                <div class="desc">
-                    <!-- Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores, rerum mollitia. Voluptate alias illo voluptatum aut quas in veniam vero, veritatis, distinctio, perspiciatis quo unde maiores iure asperiores? Voluptates, mollitia.
-                    Lorem ipsum dolor sit consectetur adipisicing elit. Distinctio, optio beatae. Est optio necessitatibus nemo error corporis ea eaque quo iusto explicabo impedit natus ipsa iure aperiam, dolore incidunt doloribus.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit error quas, sed quae cum adipisci quidem voluptatibus explicabo vitae modi cupiditate porro incidunt temporibus dignissimos cumque aut alias sint optio?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus perspiciatis, nobis voluptas in fugiat voluptates odio maiores totam delectus esse beatae dolorem! Inventore ipsam doloribus non facere quod esse debitis. -->
-
-                </div>
-                <div >
-                    <a></a>
                 </div>
               </div>
         </div>
@@ -103,7 +83,7 @@
                         let titleDiv = document.createElement('div');
                         titleDiv.className ='title';
                         titleDiv.innerHTML = blog.title;
-                        blogDiv.appendChild(titleDiv);
+                        blogDiv.appendChild(blogDiv);
                         //构造发布时间
                         let dateDiv = document.createElement('div');
                         dateDiv.className ='time';
@@ -123,7 +103,7 @@
                         a.href='blog_detail.html?blogId='+blog.blogId;
                         blogDiv.appendChild(a);
 
-                        //把blogDiv 挂到dom树上
+                        //把noteDiv 挂到dom树上
                         rightDiv.appendChild(blogDiv);
                     }
 

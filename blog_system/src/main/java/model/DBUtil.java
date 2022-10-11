@@ -9,7 +9,7 @@ import java.sql.*;
 public class DBUtil {
     private static final String URL="jdbc:mysql://127.0.0.1:3306/BlogSystem?characterEncoding=utf8&&useSSL=false";
     private static final String USERNAME="root";
-    private static final String PASSWORD="123456";
+    private static final String PASSWORD="";
 
 
     private  static  volatile DataSource dataSource=null;

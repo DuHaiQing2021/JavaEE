@@ -3,7 +3,7 @@
 function getUserInfo(pathName){
     $.ajax({
         type:'get',
-        url:'login',
+        url:'user/prove',
         success: function(body){
             //判断此处的body是不是一个有效的user对象（userId 是否为0）
             if(body.userId && body.userId > 0){

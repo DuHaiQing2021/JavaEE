@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+[<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -72,7 +72,7 @@
                         type:'get',
                         //location.search 拿到了形如‘？blogId=5’这样的内容，
                         //这个参数来自于博客列表页的a标签
-                        url:'blog'+location.search,
+                        url:'note/getallnotes'+location.search,
 
                         success:function(body){
                             //根据body中的内容构造页面
